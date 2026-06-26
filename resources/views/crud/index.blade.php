@@ -165,7 +165,18 @@
 
                             <tr>
 
-                                <th>Name</th>
+<th>
+    Name
+    <a href="?search={{ request('search') }}&sort=asc"
+       class="text-white text-decoration-none">
+        ▲
+    </a>
+
+    <a href="?search={{ request('search') }}&sort=desc"
+       class="text-white text-decoration-none">
+        ▼
+    </a>
+</th>
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Date</th>

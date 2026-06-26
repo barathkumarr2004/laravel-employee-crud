@@ -9,12 +9,26 @@ use App\Models\Emp;
 class EmpController extends Controller
 {
     // List + Edit form rendume ithula thaan
-    public function index()
-    {
-        $emps = Emp::all(); 
-        $emp = null; // Form ku empty ah anuppu
-        return view('crud.index', compact('emps', 'emp'));
+public function index(Request $request)
+{
+    $query = Emp::query();
+
+    // Search
+    if ($request->search) {
+        $query->where('name', 'like', '%' . $request->search . '%');
     }
+
+    // Sort
+    if ($request->sort == "asc") {
+        $query->orderBy('name', 'asc');
+    } elseif ($request->sort == "desc") {
+        $query->orderBy('name', 'desc');
+    }
+
+    $emps = $query->get();
+
+    return view('crud.index', compact('emps'));
+}
 
     // Save panna
     public function store(Request $request)
